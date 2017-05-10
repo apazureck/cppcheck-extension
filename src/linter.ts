@@ -9,6 +9,16 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { runOnWorkspace } from './analyzer';
 
+type SeverityLevel = 'Error' | 'Warning' | 'Information' | 'Hint' | 'None';
+interface SeverityMaps {
+    error: SeverityLevel;
+    warning: SeverityLevel;
+    style: SeverityLevel;
+    performance: SeverityLevel;
+    portability: SeverityLevel;
+    information: SeverityLevel;
+}
+
 function getCorrectFileName(p: string): string {
     if (!fs.existsSync(p)) {
         p = path.join(vscode.workspace.rootPath, p);
@@ -19,18 +29,9 @@ function getCorrectFileName(p: string): string {
     return p;
 }
 
-function cppcheckSeverityToDiagnosticSeverity(severity: string): vscode.DiagnosticSeverity {
-    switch (severity) {
-        case 'error':
-            return vscode.DiagnosticSeverity.Error;
-        case 'warning':
-            return vscode.DiagnosticSeverity.Warning;
-        case 'performance':
-        case 'portability':
-            return vscode.DiagnosticSeverity.Hint;
-        default:
-            return vscode.DiagnosticSeverity.Information;
-    }
+function cppcheckSeverityToDiagnosticSeverity(severity: string, config: SeverityMaps): vscode.DiagnosticSeverity {
+    const cpplevel = (<any>config)[severity] as string;
+    return (<any>vscode.DiagnosticSeverity)[cpplevel] as vscode.DiagnosticSeverity;
 }
 
 export function Lint(diagnosticCollection: vscode.DiagnosticCollection, config: {[key:string]:any}) {
@@ -68,7 +69,7 @@ export function Lint(diagnosticCollection: vscode.DiagnosticCollection, config: 
 
                 let l = doc.lineAt(line);
                 let r = new vscode.Range(line, l.text.match(/\S/).index, line, l.text.length);
-                let d = new vscode.Diagnostic(r, `(${severity}) ${message}`, cppcheckSeverityToDiagnosticSeverity(severity));
+                let d = new vscode.Diagnostic(r, `(${severity}) ${message}`, cppcheckSeverityToDiagnosticSeverity(severity, config['severityLevels'] as SeverityMaps));
                 d.source = 'cppcheck';
                 diagnostics.push(d);
             }

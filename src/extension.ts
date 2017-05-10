@@ -196,6 +196,15 @@ function configChanged() {
         config['verbose'] = settings.get('verbose', false);
         config['showOutputAfterRunning'] = settings.get('showOutputAfterRunning', true);
         config['lintingEnabled'] = settings.get('lintingEnabled', false);
+        config['severityLevels'] = settings.get('severityLevels', {
+            error: 'Error',
+            warning: 'Warning',
+            style: 'Information',
+            performance: 'Warning',
+            portability: 'Warning',
+            information: 'Information',
+            unknown: 'None'
+        });
 
         let standard = settings.get('standard', [ 'c11', 'c++11' ]);
         let outStandard: string[] = [];

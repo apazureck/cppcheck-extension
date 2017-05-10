@@ -1,153 +1,214 @@
 {
-  "name": "cppcheck",
-  "displayName": "cppcheck",
-  "description": "Invokes the 'cppcheck' static C++ code analyzer.",
-  "version": "0.0.7",
-  "author": "Matthew Ferreira",
-  "publisher": "matthewferreira",
-  "license": "MIT",
-  "icon": "logo.png",
-  "repository": {
-    "type": "Git",
-    "url": "https://github.com/matthewferreira/cppcheck-extension"
-  },
-  "engines": {
-    "vscode": "^1.5.0"
-  },
-  "categories": [
-    "Linters"
-  ],
-  "activationEvents": [
-    "*"
-  ],
-  "main": "./out/src/extension",
-  "contributes": {
-    "commands": [
-      {
-        "command": "cppcheck.runAnalysis",
-        "title": "Analyze current file",
-        "category": "Cppcheck"
-      },
-      {
-        "command": "cppcheck.runAnalysisAllFiles",
-        "title": "Analyze workspace",
-        "category": "Cppcheck"
-      },
-      {
-        "command": "cppcheck.showCommands",
-        "title": "Show commands",
-        "category": "Cppcheck"
-      },
-      {
-        "command": "cppcheck.readTheManual",
-        "title": "Read the manual",
-        "category": "Cppcheck"
-      }
+    "name": "cppcheck",
+    "displayName": "cppcheck",
+    "description": "Invokes the 'cppcheck' static C++ code analyzer.",
+    "version": "0.0.7",
+    "author": "Matthew Ferreira",
+    "publisher": "matthewferreira",
+    "license": "MIT",
+    "icon": "logo.png",
+    "repository": {
+        "type": "Git",
+        "url": "https://github.com/matthewferreira/cppcheck-extension"
+    },
+    "engines": {
+        "vscode": "^1.5.0"
+    },
+    "categories": [
+        "Linters"
     ],
-    "configuration": {
-      "type": "object",
-      "title": "cppcheck",
-      "properties": {
-        "cppcheck.enable": {
-          "type": "boolean",
-          "default": true,
-          "description": "Controls whether cppcheck is enabled for C++ files."
-        },
-        "cppcheck.cppcheckPath": {
-          "type": "string",
-          "default": null,
-          "description": "The path to the cppcheck executable. If not set, the default location will be used."
-        },
-        "cppcheck.includePaths": {
-          "type": "array",
-          "default": [],
-          "description": "Paths to search for include files. They may be relative or absolute."
-        },
-        "cppcheck.platform": {
-          "type": "string",
-          "enum": [
-            "unix32",
-            "unix64",
-            "win32A",
-            "win32W",
-            "win64",
-            "native"
-          ],
-          "default": "native",
-          "description": "The platform used for types and sizes."
-        },
-        "cppcheck.standard": {
-          "type": "array",
-          "default": [
-            "c11",
-            "c++11"
-          ],
-          "description": "The language standards to check against. Can be one or more of: posix, c89, c99, c11, c++03, c++11."
-        },
-        "cppcheck.define": {
-          "type": "array",
-          "default": [],
-          "description": "Preprocessor symbols to define."
-        },
-        "cppcheck.undefine": {
-          "type": "array",
-          "default": [],
-          "description": "Preprocessor symbols to undefine."
-        },
-        "cppcheck.suppressions": {
-          "type": "array",
-          "default": [],
-          "description": "Warnings to suppress. Refer to the 'cppcheck' documentation for what to supply here."
-        },
-        "cppcheck.verbose": {
-          "type": "boolean",
-          "default": false,
-          "description": "Whether to enable verbose output from 'cppcheck'."
-        },
-        "cppcheck.showStatusBarItem": {
-          "type": "boolean",
-          "default": true,
-          "description": "Whether to show a 'Cppcheck' item in the status bar for launching the static analyzer."
-        },
-        "cppcheck.showOutputAfterRunning": {
-          "type": "boolean",
-          "default": true,
-          "description": "Whether to show the 'Cppcheck' output channel after running the analyzer."
-        },
-        "cppcheck.lintingEnabled": {
-          "type": "boolean",
-          "default": false,
-          "description": "Whether to enable automatic linting for C/C++ code. Linting runs when opening a workspace or saving a file."
+    "activationEvents": [
+        "*"
+    ],
+    "main": "./out/src/extension",
+    "contributes": {
+        "commands": [{
+                "command": "cppcheck.runAnalysis",
+                "title": "Analyze current file",
+                "category": "Cppcheck"
+            },
+            {
+                "command": "cppcheck.runAnalysisAllFiles",
+                "title": "Analyze workspace",
+                "category": "Cppcheck"
+            },
+            {
+                "command": "cppcheck.showCommands",
+                "title": "Show commands",
+                "category": "Cppcheck"
+            },
+            {
+                "command": "cppcheck.readTheManual",
+                "title": "Read the manual",
+                "category": "Cppcheck"
+            }
+        ],
+        "configuration": {
+            "type": "object",
+            "title": "cppcheck",
+            "properties": {
+                "cppcheck.enable": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Controls whether cppcheck is enabled for C++ files."
+                },
+                "cppcheck.cppcheckPath": {
+                    "type": "string",
+                    "default": null,
+                    "description": "The path to the cppcheck executable. If not set, the default location will be used."
+                },
+                "cppcheck.includePaths": {
+                    "type": "array",
+                    "default": [],
+                    "description": "Paths to search for include files. They may be relative or absolute."
+                },
+                "cppcheck.platform": {
+                    "type": "string",
+                    "enum": [
+                        "unix32",
+                        "unix64",
+                        "win32A",
+                        "win32W",
+                        "win64",
+                        "native"
+                    ],
+                    "default": "native",
+                    "description": "The platform used for types and sizes."
+                },
+                "cppcheck.standard": {
+                    "type": "array",
+                    "default": [
+                        "c11",
+                        "c++11"
+                    ],
+                    "description": "The language standards to check against. Can be one or more of: posix, c89, c99, c11, c++03, c++11."
+                },
+                "cppcheck.define": {
+                    "type": "array",
+                    "default": [],
+                    "description": "Preprocessor symbols to define."
+                },
+                "cppcheck.undefine": {
+                    "type": "array",
+                    "default": [],
+                    "description": "Preprocessor symbols to undefine."
+                },
+                "cppcheck.suppressions": {
+                    "type": "array",
+                    "default": [],
+                    "description": "Warnings to suppress. Refer to the 'cppcheck' documentation for what to supply here."
+                },
+                "cppcheck.verbose": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Whether to enable verbose output from 'cppcheck'."
+                },
+                "cppcheck.showStatusBarItem": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Whether to show a 'Cppcheck' item in the status bar for launching the static analyzer."
+                },
+                "cppcheck.showOutputAfterRunning": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Whether to show the 'Cppcheck' output channel after running the analyzer."
+                },
+                "cppcheck.lintingEnabled": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Whether to enable automatic linting for C/C++ code. Linting runs when opening a workspace or saving a file."
+                },
+                "cppcheck.severityLevels": {
+                    "type": "object",
+                    "description": "Maps the severity levels of cppcheck to VSCode severity levels (Error, Warning, Information, Hint). Setting to 'None' will not show the severity type at all",
+                    "default": {
+                        "error": "Error",
+                        "warning": "Warning",
+                        "style": "Information",
+                        "performance": "Warning",
+                        "portability": "Warning",
+                        "information": "Information"
+                    },
+                    "properties": {
+                        "error": {
+                            "description": "used when bugs are found",
+                            "type": "string",
+                            "default": "Error",
+                            "enum": [
+                                "Error", "Warning", "Hint", "Information", "None"
+                            ]
+                        },
+                        "warning": {
+                            "description": "suggestions about defensive programming to prevent bugs",
+                            "type": "string",
+                            "default": "Warning",
+                            "enum": [
+                                "Error", "Warning", "Hint", "Information", "None"
+                            ]
+                        },
+                        "style": {
+                            "description": "stylistic issues related to code cleanup (unused functions, redundant code, constness, and such)",
+                            "type": "string",
+                            "default": "Information",
+                            "enum": [
+                                "Error", "Warning", "Hint", "Information", "None"
+                            ]
+                        },
+                        "performance": {
+                            "description": "Suggestions for making the code faster. These suggestions are only based on common knowledge. It  is  not  certain  you'll  get  any  measurable  difference  in  speed  by  fixing these messages",
+                            "type": "string",
+                            "default": "Warning",
+                            "enum": [
+                                "Error", "Warning", "Hint", "Information", "None"
+                            ]
+                        },
+                        "portability": {
+                            "description": "portability  warnings.  64-bit  portability.  code  might  work  different  on  different compilers. etc.",
+                            "type": "string",
+                            "default": "Warning",
+                            "enum": [
+                                "Error", "Warning", "Hint", "Information", "None"
+                            ]
+                        },
+                        "information": {
+                            "description": "Configuration   problems.   The   recommendation   is   to   only   enable   these   during configuration.",
+                            "type": "string",
+                            "default": "Information",
+                            "enum": [
+                                "Error", "Warning", "Hint", "Information", "None"
+                            ]
+                        }
+                    }
+                }
+            }
         }
-      }
+    },
+    "scripts": {
+        "vscode:prepublish": "tsc -p ./",
+        "compile": "tsc -p ./",
+        "build": "npm run compile",
+        "build:watch": "tsc -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "pkgvars": "node ./node_modules/vscode/bin/install",
+        "test": "node ./node_modules/vscode/bin/test"
+    },
+    "devDependencies": {
+        "@types/lodash": "^4.14.62",
+        "@types/mocha": "^2.2.40",
+        "@types/node": "^7.0.12",
+        "@types/opn": "^3.0.28",
+        "eslint": "^3.19.0",
+        "mocha": "^3.2.0",
+        "os": "^0.1.1",
+        "tslint": "^5.1.0",
+        "typescript": "^2.2.2",
+        "vscode": "^1.1.0"
+    },
+    "dependencies": {
+        "child_process": "^1.0.2",
+        "fs": "0.0.1-security",
+        "lodash": "^4.17.4",
+        "opn": "^4.0.2",
+        "os": "^0.1.1"
     }
-  },
-  "scripts": {
-    "vscode:prepublish": "tsc -p ./",
-    "compile": "tsc -p ./",
-    "build": "npm run compile",
-    "build:watch": "tsc -watch -p ./",
-    "postinstall": "node ./node_modules/vscode/bin/install",
-    "pkgvars": "node ./node_modules/vscode/bin/install",
-    "test": "node ./node_modules/vscode/bin/test"
-  },
-  "devDependencies": {
-    "@types/lodash": "^4.14.62",
-    "@types/mocha": "^2.2.40",
-    "@types/node": "^7.0.12",
-    "@types/opn": "^3.0.28",
-    "eslint": "^3.19.0",
-    "mocha": "^3.2.0",
-    "os": "^0.1.1",
-    "tslint": "^5.1.0",
-    "typescript": "^2.2.2",
-    "vscode": "^1.1.0"
-  },
-  "dependencies": {
-    "child_process": "^1.0.2",
-    "fs": "0.0.1-security",
-    "lodash": "^4.17.4",
-    "opn": "^4.0.2",
-    "os": "^0.1.1"
-  }
 }
