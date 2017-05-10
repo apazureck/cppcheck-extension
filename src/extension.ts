@@ -202,8 +202,7 @@ function configChanged() {
             style: 'Information',
             performance: 'Warning',
             portability: 'Warning',
-            information: 'Information',
-            unknown: 'None'
+            information: 'Information'
         });
 
         let standard = settings.get('standard', [ 'c11', 'c++11' ]);
