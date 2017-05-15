@@ -71,7 +71,7 @@ export function Lint(diagnosticCollection: vscode.DiagnosticCollection, config: 
                 let r = new vscode.Range(line, l.text.match(/\S/).index, line, l.text.length);
                 const level = cppcheckSeverityToDiagnosticSeverity(severity, config['severityLevels'] as SeverityMaps);
                 if (level !== undefined) {
-                    let d = new vscode.Diagnostic(r, `(${severity}) ${message}`, );
+                    let d = new vscode.Diagnostic(r, `(${severity}) ${message}`, level);
                     d.source = 'cppcheck';
                     diagnostics.push(d);
                 }
